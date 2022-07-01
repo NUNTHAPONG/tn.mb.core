@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap");
+
+* {
+  font-family: "Noto Sans", "Noto Sans Thai", sans-serif;
+  font-size: medium;
+}

@@ -1,0 +1,304 @@
+<div class="row my-2">
+  <div class="card">
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col">
+          <a
+            routerLink="../"
+            class="text-decoration-none fw-bold"
+            style="color: black; cursor: pointer;"
+            ><i class="bi bi-arrow-left-square-fill"> </i> Back
+          </a>
+        </div>
+        <div class="col-3 d-flex justify-content-between">
+          <button
+            *ngIf = "canDelete"
+            class="btn btn-danger btn-sm"
+            (click)="openModal(deleteModal)"
+            type="button"
+          >
+            <i class="bi bi-trash3"> </i>
+            Delete
+          </button>
+          <ng-template #deleteModal>
+            <div class="modal-body text-center">
+              <p>Do you want to delete?</p>
+              <button
+                type="button"
+                class="btn btn-default"
+                (click)="delete()"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="closeModal()"
+              >
+                No
+              </button>
+            </div>
+          </ng-template>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="openModal(saveModal)"
+            type="button"
+          >
+            <i class="bi bi-save"> </i>
+            Save
+          </button>
+          <ng-template #saveModal>
+            <div class="modal-body text-center">
+              <p>Do you want to save?</p>
+              <button
+                type="button"
+                class="btn btn-default"
+                (click)="save()"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="closeModal()"
+              >
+                No
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <ng-container [formGroup]="customerForm">
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="customerId"
+              >Id <span class="text-danger">*</span></label
+            >
+            <input
+              class="form-control text-center"
+              type="text"
+              formControlName="customerId"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label" for="firstName"
+              >First Name <span class="text-danger">*</span></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              formControlName="firstName"
+              [ngClass]="{
+                'is-invalid': customerForm.controls.firstName.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.firstName.errors?.required"
+            >
+              Please enter First Name
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.firstName.errors?.maxlength"
+            >
+              Max length 200
+            </div>
+          </div>
+          <div class="col">
+            <label class="form-label" for="lastName"
+              >Last Name <span class="text-danger">*</span></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              formControlName="lastName"
+              [ngClass]="{
+                'is-invalid': customerForm.controls.lastName.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.lastName.errors?.required"
+            >
+              Please enter Last Name
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.lastName.errors?.maxlength"
+            >
+              Max length 200
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="phone">Phone</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="phone"
+              [ngClass]="{ 'is-invalid': customerForm.controls.phone.invalid }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.phone.errors?.pattern"
+            >
+              Please enter phone number in (xxx) xxx-xxxxx
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.phone.errors?.maxlength"
+            >
+              Max length 25
+            </div>
+          </div>
+          <div class="col">
+            <label class="form-label" for="email"
+              >E-Mail <span class="text-danger">*</span>
+            </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="email"
+              [ngClass]="{ 'is-invalid': customerForm.controls.email.invalid }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.email.errors?.required"
+            >
+              Please enter Email
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.email.errors?.email"
+            >
+              Please enter Email Format
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.email.errors?.maxlength"
+            >
+              Max length 200
+            </div>
+          </div>
+          <div class="col">
+            <label class="form-label" for="state">State </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="state"
+              [ngClass]="{ 'is-invalid': customerForm.controls.state.invalid }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.state.errors?.maxlength"
+            >
+              Max length 25
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="street">Street </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="street"
+              [ngClass]="{ 'is-invalid': customerForm.controls.street.invalid }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.street.errors?.maxlength"
+            >
+              Max length 200
+            </div>
+          </div>
+          <div class="col">
+            <label class="form-label" for="city">City </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="city"
+              [ngClass]="{ 'is-invalid': customerForm.controls.city.invalid }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.city.errors?.maxlength"
+            >
+              Max length 50
+            </div>
+          </div>
+          <div class="col">
+            <label class="form-label" for="zipCode">Zipcode </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="zipCode"
+              [ngClass]="{
+                'is-invalid': customerForm.controls.zipCode.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.zipCode.errors?.pattern"
+            >
+              Please enter number only
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="customerForm.controls.zipCode.errors?.maxlength"
+            >
+              Max length 5
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div *ngIf="customer.orders.length > 0" class="row my-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">Order Id</th>
+        <th class="text-center" scope="col">Status</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Shipped Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let order of customer.orders"
+        ><tr>
+          <th class="text-center" scope="row">
+            <a
+              class="text-decoration-none"
+              [routerLink]=""
+              [state]="{ orderId: order.orderId }"
+            >
+              {{ order.orderId }}
+            </a>
+          </th>
+          <ng-container [ngSwitch]="order.orderStatus">
+            <td class="text-center" *ngSwitchCase="1">
+              <i class="bi bi-hourglass-split"></i>
+            </td>
+            <td class="text-center" *ngSwitchCase="2">
+              <i class="bi bi-cash-coin"></i>
+            </td>
+            <td class="text-center" *ngSwitchCase="3">
+              <i class="bi bi-truck"></i>
+            </td>
+            <td class="text-center" *ngSwitchCase="4">
+              <i class="bi bi-check-all"></i>
+            </td>
+          </ng-container>
+          <td>{{ order.orderDate | date }}</td>
+          <td>{{ order.shippedDate | date }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

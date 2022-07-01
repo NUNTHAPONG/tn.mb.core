@@ -1,0 +1,47 @@
+<div class="container-xl">
+  <div class="row">
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-3">
+      <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="''">NavBar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          (click)="isMenuCollapsed = !isMenuCollapsed"
+          [attr.aria-expanded]="!isMenuCollapsed"
+          aria-controls="collapseBasic"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+        <div [collapse]="isMenuCollapsed" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a
+                class="nav-link"
+                [routerLink]="['cs/customer']"
+                (click)="isMenuCollapsed = true"
+                >Customer</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="'/cs'"
+                (click)="isMenuCollapsed = true"
+                >Examples</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="'/cs'"
+                (click)="isMenuCollapsed = true"
+                >About</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <router-outlet></router-outlet>
+</div>

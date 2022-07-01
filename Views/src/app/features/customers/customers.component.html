@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <ng-container [formGroup]="searchForm">
+          <div class="col">
+            <input
+              #input
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              (input)="search(input.value)"
+              formControlName="keyword"
+              placeholder="Searching..."
+            />
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+            <!-- <button
+              class="btn btn-primary mx-2"
+              type="submit"
+              (click)="search()"
+            >
+              <i class="bi bi-search"> </i>
+              Search
+            </button> -->
+            <button class="btn btn-light mx-2" type="submit" (click)="clear()">
+              <i class="bi bi-arrow-clockwise"> </i>
+              Reset
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row my-2">
+  <div class="col">
+    <a
+      class="btn btn-primary"
+      role="button"
+      [routerLink]="['detail']"
+      [state]="{ id: null }"
+      ><i class="bi bi-plus-square"> </i>
+      Add
+    </a>
+  </div>
+</div>
+<div class="row my-2">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngFor="
+            let customer of customers
+              | slice
+                : (page - 1) * itemsPerPage
+                : (page - 1) * itemsPerPage + itemsPerPage
+          "
+          ><tr>
+            <th class="text-center" scope="row">
+              <a
+                class="text-decoration-none"
+                [routerLink]="['detail']"
+                [state]="{ id: customer.customerId }"
+              >
+                {{ customer.customerId }}
+              </a>
+            </th>
+            <td>
+              {{ customer.firstName + " " + customer.lastName }}
+            </td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.state }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <pagination
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      [customFirstTemplate]="firstTemplate"
+      [customLastTemplate]="lastTemplate"
+      [customPreviousTemplate]="prevTemplate"
+      [customNextTemplate]="nextTemplate"
+      (pageChanged)="pageChanged($event)"
+    ></pagination>
+    <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <i class="bi bi-chevron-right"></i>
+    </ng-template>
+     
+    <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <i class="bi bi-chevron-left"></i>
+    </ng-template>
+     
+    <ng-template #lastTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <i class="bi bi-chevron-bar-right"></i>
+    </ng-template>
+     
+    <ng-template #firstTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <i class="bi bi-chevron-bar-left"></i>
+    </ng-template>
+  </div>
+</div>
