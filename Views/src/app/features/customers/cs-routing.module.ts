@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomersDetailComponent } from './customers-detail.component';
 import { CustomersComponent } from './customers.component';
+import { CustomersResolver } from './customers.resolver';
 
 const routes: Routes = [
   {
@@ -10,7 +11,10 @@ const routes: Routes = [
       { path: 'customer', component: CustomersComponent },
       {
         path: 'customer/detail',
-        component: CustomersDetailComponent
+        component: CustomersDetailComponent,
+        resolve: {
+          data : CustomersResolver
+        }
       },
     ],
   },
@@ -19,6 +23,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [CustomersResolver]
 })
 export class CsRoutingModule {}

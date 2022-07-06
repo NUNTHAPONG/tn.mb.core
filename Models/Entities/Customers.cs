@@ -1,4 +1,4 @@
-namespace Web.Models.Entites
+namespace Web.Models.Entities
 {
     public class Customers : EntityBase
     {
@@ -11,8 +11,6 @@ namespace Web.Models.Entites
         public string? City { get; set; }
         public string? State { get; set; }
         public string? ZipCode { get; set; }
-
-        public virtual ICollection<Orders> Orders { get; } = new List<Orders>();
 
     }
 }

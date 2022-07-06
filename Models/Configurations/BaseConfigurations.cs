@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
-namespace Web.Models
+namespace Web.Models.Configurations
 {
     public class BaseConfigurations<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : EntityBase
     {

@@ -1,4 +1,4 @@
-namespace Web.Models.Entites
+namespace Web.Models.Entities
 {
     public class Products : EntityBase
     {
@@ -8,7 +8,6 @@ namespace Web.Models.Entites
         public int CategoryId { get; set; }
         public int ModelYear { get; set; }
         public decimal? ListPrice { get; set; }
-
         public Brands Brands { get; } = new Brands();
         public Categories Categories { get; } = new Categories();
     }

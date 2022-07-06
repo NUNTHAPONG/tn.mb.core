@@ -7,9 +7,9 @@ namespace Web.Controllers.API
     {
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] Read.Query query)
         {
-            return Ok(await Mediator.Send(new Read()));
+            return Ok(await Mediator.Send(query));
         }
 
         [HttpPost]

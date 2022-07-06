@@ -1,4 +1,6 @@
-﻿namespace Web.Models.Entites
+﻿using Web.Models.Entities;
+
+namespace Web.Models.Entities
 {
     public class Brands : EntityBase
     {

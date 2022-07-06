@@ -1,0 +1,87 @@
+.group-header {
+  width: 100%;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 13px;
+}
+.group-header hr {
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+}
+:host::ng-deep .ngx-datatable.bootstrap.scroll-vertical {
+  height: 60vh;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem 0.35rem;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-header .datatable-header-cell label {
+  margin: 0;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-scroll {
+  width: 100% !important;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-scroll .datatable-row-detail .container-fluid {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-scroll .datatable-row-detail .container-fluid .alert {
+  margin: 0;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+  padding: 0.35rem;
+  line-height: 1.28;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell .btn-link i {
+  transition: all 0.2s ease;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell .fa-check {
+  color: #1f9df6;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell .fa-times {
+  color: #d64949;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
+  background-color: unset;
+  color: inherit;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active.datatable-row-even {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer {
+  background-color: #e4e5e6;
+  color: #545454;
+  overflow: unset;
+}
+@media screen and (max-width: 768px) {
+  :host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-footer-inner {
+    flex-direction: column;
+ }
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-footer-inner .custom-select {
+  min-width: 50px;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .page-count {
+  line-height: 36px;
+  height: 36px;
+  flex: 1 0 auto;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager {
+  flex: 1 0 auto;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul {
+  margin: 7px 0;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li {
+  margin: 0;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li a {
+  color: #545454;
+  transition: all 0.2s ease-in-out;
+}
+:host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a, :host::ng-deep .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {
+  color: white;
+  font-weight: 500;
+  background-color: #a9a9a9;
+}

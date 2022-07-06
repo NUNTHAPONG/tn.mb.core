@@ -20,7 +20,7 @@ export class CustomersResolver implements Resolve<boolean> {
     const param = this.router.getCurrentNavigation()?.extras.state;
     const detailResult =
       param && param.id
-        ? this.cs.findCustomerById(param.id)
+        ? this.cs.findById(param.id)
         : of({} as Customer);
 
     return forkJoin([detailResult]).pipe(

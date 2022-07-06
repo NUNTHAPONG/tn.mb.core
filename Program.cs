@@ -10,33 +10,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddDbContext<SalesDbContext>(options =>
+builder.Services.AddDbContext<CleanDbContext>(options =>
 {
-    options
-        .UseNpgsql(builder.Configuration.GetConnectionString("pg"))
-        .UseSnakeCaseNamingConvention();
-});
+    options.UseNpgsql(builder.Configuration.GetConnectionString("pg"));
+}, ServiceLifetime.Scoped);
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "AllowOrigin",
+    options.AddPolicy("TnPolicy",
                        builder =>
                        {
-                           builder.WithOrigins("http://localhost:4200")
+                           builder.AllowAnyOrigin()
                                   .AllowAnyHeader()
                                   .AllowAnyMethod();
                        });
 });
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
@@ -44,8 +39,8 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Empty}/{action=Index}/{id?}");
+    pattern: "{controller=Empty}/{action=Index}/{id}");
 });
 app.MapControllers();
-app.UseCors("AllowOrigin");
+app.UseCors("TnPolicy");
 app.Run();

@@ -12,8 +12,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./features/customers/cs.module').then((m) => m.CsModule),
       },
+      {
+        path: 'pd',
+        loadChildren: () =>
+          import('./features/products/pd.module').then((m) => m.PdModule),
+      },
     ],
-  },
+  }
 ];
 
 @NgModule({

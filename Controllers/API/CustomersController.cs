@@ -12,7 +12,7 @@ namespace Web.Controllers.API
             return Ok(await Mediator.Send(query));
         }
 
-        [HttpGet("findById/{CustomerId}")]
+        [HttpGet("findById/{id}")]
         public async Task<IActionResult> FindById([FromRoute] Find.Query query)
         {
             return Ok(await Mediator.Send(query));

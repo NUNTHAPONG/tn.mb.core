@@ -1,36 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
-import {
-  debounceTime,
-  Subject,
-  switchMap,
-} from 'rxjs';
-import { Customer, CustomersService } from './customers.service';
+import { Subject, debounceTime, switchMap } from 'rxjs';
+import { Product, ProductsService } from './products.service';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css'],
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
 })
-export class CustomersComponent implements OnInit {
+export class ProductsComponent implements OnInit {
+
   totalItems: number;
   page: number = 1;
   itemsPerPage: number = 10;
   keyword = new Subject<string>();
-  customers: Customer[] = [];
-  addCustomer: Customer = {} as Customer;
+  products: Product[] = []
   searchForm: FormGroup = new FormGroup({});
 
-  constructor(private cs: CustomersService, private fb: FormBuilder) {}
+
+  constructor(private pd: ProductsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.addCustomer.rowState = 1;
-    this.createForm();
-    this.cs.getCustomersAll().subscribe((res) => {
-      this.customers = res;
+    this.createForm()
+    this.pd.getAllProducts().subscribe(res => {
+      this.createForm();
+      this.products = res
       this.setPageLength()
-    });
+    })
     this.installEvent();
   }
 
@@ -38,8 +35,8 @@ export class CustomersComponent implements OnInit {
     return this.page = event.page;
   }
 
-  setPageLength(){
-    return this.totalItems = this.customers.length;
+  setPageLength() {
+    return this.totalItems = this.products.length;
   }
 
   createForm() {
@@ -47,7 +44,7 @@ export class CustomersComponent implements OnInit {
       keyword: null,
     });
   }
-  
+
   installEvent() {
     this.onSearch();
   }
@@ -65,12 +62,12 @@ export class CustomersComponent implements OnInit {
       .pipe(
         debounceTime(800),
         switchMap((searchText) => {
-          return this.cs.getCustomersAll(searchText);
+          return this.pd.getAllProducts(searchText);
         })
       )
       .subscribe((res) => {
-        this.customers = res;
-        this.totalItems = this.customers.length;
+        this.products = res;
+        this.totalItems = this.products.length;
       });
   }
 

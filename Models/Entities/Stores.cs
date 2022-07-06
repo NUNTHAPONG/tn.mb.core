@@ -1,4 +1,4 @@
-namespace Web.Models.Entites
+namespace Web.Models.Entities
 {
     public class Stores : EntityBase
     {
@@ -10,7 +10,5 @@ namespace Web.Models.Entites
         public string? City { get; set; }
         public string? State { get; set; }
         public string? ZipCode { get; set; }
-
-        public ICollection<Staffs> Staffs { get; set; }
     }
 }

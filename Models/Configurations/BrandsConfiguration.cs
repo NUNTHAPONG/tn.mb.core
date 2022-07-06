@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Web.Models.Configurations;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
 namespace Web.Models
 {

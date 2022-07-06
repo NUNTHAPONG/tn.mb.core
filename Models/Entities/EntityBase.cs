@@ -1,4 +1,4 @@
-﻿namespace Web.Models
+﻿namespace Web.Models.Entities
 {
     public enum RowState
     {
@@ -11,7 +11,7 @@
 
         public EntityBase()
         {
-            this.RowState = RowState.Normal;
+            RowState = RowState.Normal;
         }
     }
 }

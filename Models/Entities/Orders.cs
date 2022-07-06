@@ -1,4 +1,4 @@
-namespace Web.Models.Entites
+namespace Web.Models.Entities
 {
     public class Orders : EntityBase
     {

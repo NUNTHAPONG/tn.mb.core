@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap, finalize } from 'rxjs/operators';
 import { Customer, CustomersService } from './customers.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -11,7 +11,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./customers-detail.component.css'],
 })
 export class CustomersDetailComponent implements OnInit {
-  params;
   customer: Customer = {} as Customer;
   customerForm: FormGroup = new FormGroup({});
   canDelete = false;
@@ -19,34 +18,27 @@ export class CustomersDetailComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(
-    private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cs: CustomersService,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.params = this.router.getCurrentNavigation()?.extras.state;
     this.createForm();
-    this.cs.findById(this.params.id).subscribe((res) => {
-      this.customer = res;
+    this.route.data.subscribe(res => {
+      this.customer = res.data.detail;
       this.rebuildForm();
-    });
+    })
     this.installEvent();
   }
 
   createForm() {
     this.customerForm = this.fb.group({
-      customerId: null,
+      customerId: "AUTO",
       firstName: [null, [Validators.required, Validators.maxLength(200)]],
       lastName: [null, [Validators.required, Validators.maxLength(200)]],
-      phone: [
-        null,
-        [
-          Validators.maxLength(25),
-          Validators.pattern('[(][0-9]{3}[)] [0-9]{3}[-][0-9]{4}'),
-        ],
-      ],
+      phone: [null, [Validators.maxLength(25)]],
       email: [
         null,
         [Validators.required, Validators.maxLength(200), Validators.email],
@@ -54,7 +46,7 @@ export class CustomersDetailComponent implements OnInit {
       street: [null, [Validators.maxLength(200)]],
       city: [null, [Validators.maxLength(50)]],
       state: [null, [Validators.maxLength(25)]],
-      zipCode: [null, [Validators.maxLength(5), Validators.pattern('[0-9]*')]],
+      zipCode: [null, [Validators.maxLength(5), Validators.pattern('\\d*')]],
     });
   }
 
@@ -64,16 +56,23 @@ export class CustomersDetailComponent implements OnInit {
       this.customerForm.patchValue(this.customer);
       this.canDelete = true;
     } else {
-      this.customerForm.controls.customerId.setValue('AUTO');
       this.customerForm.markAsPristine();
       this.customer.orders = [];
     }
   }
 
-  installEvent() {}
+  installEvent() { }
+
+  isFormDirty() {
+    return this.customerForm.dirty;
+  }
+
+  isFormValid() {
+    return this.customerForm.valid;
+  }
 
   openModal(template: TemplateRef<any>) {
-    if (this.customerForm.valid) {
+    if (this.isFormValid()) {
       this.modalRef = this.modalService.show(template);
     }
   }
@@ -95,6 +94,13 @@ export class CustomersDetailComponent implements OnInit {
         this.rebuildForm();
       });
     this.closeModal();
+  }
+
+  clear() {
+    if (this.isFormDirty()) {
+      this.customerForm.reset({ customerId: "AUTO" });
+      this.customerForm.markAsPristine();
+    }
   }
 
   delete() {

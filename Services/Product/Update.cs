@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Web.Models;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
 namespace Web.Services.Product
 {
@@ -19,8 +19,8 @@ namespace Web.Services.Product
 
         public class Handler : IRequestHandler<Command, UpdateResult>
         {
-            private readonly SalesDbContext _context;
-            public Handler(SalesDbContext context)
+            private readonly CleanDbContext _context;
+            public Handler(CleanDbContext context)
             {
                 _context = context;
             }

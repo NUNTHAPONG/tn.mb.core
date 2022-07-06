@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Web.Models;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
 namespace Web.Services.Customer
 {
@@ -20,8 +20,8 @@ namespace Web.Services.Customer
 
         public class Handler : IRequestHandler<Command, DeleteResult>
         {
-            private readonly SalesDbContext _context;
-            public Handler(SalesDbContext context)
+            private readonly CleanDbContext _context;
+            public Handler(CleanDbContext context)
             {
                 _context = context;
             }

@@ -1,7 +1,6 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Web.Models;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
 namespace Web.Services.Customer
 {
@@ -9,13 +8,13 @@ namespace Web.Services.Customer
     {
         public class Query : IRequest<Customers>
         {
-            public int CustomerId { get; set; }
+            public int Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Customers>
         {
-            private readonly SalesDbContext _context;
-            public Handler(SalesDbContext context)
+            private readonly CleanDbContext _context;
+            public Handler(CleanDbContext context)
             {
                 _context = context;
             }
@@ -23,8 +22,7 @@ namespace Web.Services.Customer
             public async Task<Customers> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _context.Set<Customers>()
-                    .Include(m => m.Orders)
-                    .FirstOrDefaultAsync(i => i.CustomerId == request.CustomerId);
+                    .FindAsync(request.Id);
             }
         }
     }

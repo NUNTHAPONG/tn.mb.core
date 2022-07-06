@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <ng-container [formGroup]="searchForm">
+          <div class="col">
+            <input
+              #input
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              (input)="search(input.value)"
+              formControlName="keyword"
+              placeholder="Searching..."
+            />
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+            <button class="btn btn-light mx-2" type="submit" (click)="clear()">
+              <i class="bi bi-arrow-clockwise"> </i>
+              Reset
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <app-table #productTable [rows]="products" [summaryRow]="false">
+    <ngx-datatable-column name="productId" [width]="10" cellClass="text-center fw-bold">
+      <ng-template ngx-datatable-header-template> ID </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="productName" [width]="300">
+      <ng-template ngx-datatable-header-template> Product Name </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="brands" [width]="50">
+      <ng-template ngx-datatable-header-template> Brand </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value.brandName }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="categories" [width]="50">
+      <ng-template ngx-datatable-header-template> Category </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value.categoryName }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="listPrice" [width]="50" [cellClass]="'text-end'">
+      <ng-template ngx-datatable-header-template>
+        Price
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        $ {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+  </app-table>
+</div>

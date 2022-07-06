@@ -8,10 +8,10 @@
     }
   },
   "profiles": {
-    "motorbike_shop": {
+    "Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:3000",
+      "applicationUrl": "https://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Web.Models.Entites;
+using Web.Models.Entities;
 
 namespace Web.Models.Configurations
 {
@@ -11,7 +11,7 @@ namespace Web.Models.Configurations
             base.Configure(builder);
             builder.HasKey(p => p.CustomerId);
             builder.Property(p => p.CustomerId).UseIdentityColumn();
-            builder.HasMany(f => f.Orders).WithOne().HasForeignKey(p => p.CustomerId).OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(f => f.Orders).WithOne().HasForeignKey(p => p.CustomerId).OnDelete(DeleteBehavior.Cascade);
         }
 }
 }
